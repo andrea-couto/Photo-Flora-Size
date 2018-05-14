@@ -1,3 +1,6 @@
+# This program draws heavily upon the following tutorial
+# https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/
+
 import cv2
 import numpy as np
 import argparse
@@ -29,7 +32,7 @@ kernelClose = np.ones((20, 20))
 
 img = cv2.resize(img, (340, 220))
 
-# FOR GETTING GREEN CONTOUR
+# Getting green contour
 
 # convert BGR to HSV
 imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -42,7 +45,7 @@ maskClose = cv2.morphologyEx(maskOpen, cv2.MORPH_CLOSE, kernelClose)
 maskFinal = maskClose
 _, conts, h = cv2.findContours(maskFinal.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
-# END GETTING GREEN CONTOUR
+# For getting reference Object
 
 gray = cv2.GaussianBlur(img, (7, 7), 0)
 
@@ -57,15 +60,12 @@ Othercnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_S
 ref = Othercnts[0] if imutils.is_cv2() else Othercnts[1]
 
 ref = ref[0]
-# END GETTING REFERENCES
-
-# here also get the contour of the reference object conts.add(reference obj)
 
 (cnts, _) = contours.sort_contours(conts)
 pixelsPerMetric = None
 
+# add reference object to list of plant objects
 cnts = (ref,)+cnts
-print(len(cnts))
 
 
 for c in cnts:
