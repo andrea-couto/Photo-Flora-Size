@@ -11,6 +11,13 @@ reference object:<br>
 
 python returnPlantSize.py --image plantImage.jpg --width 0.955<br><br>
 
+Requirements:<br>
+openCV-python<br>
+scipy<br>
+numpy<br>
+imutils<br>
+
+
 
 
 
