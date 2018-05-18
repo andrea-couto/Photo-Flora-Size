@@ -13,6 +13,11 @@ from imutils import perspective
 def midpoint(ptA, ptB):
     return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
 
+'''
+maybe we shoud'nt be taking the image as a parameter because we dont know what the image name will be
+how about we grab a list of all the images in the images folder, then while list is not empty,
+we take the image and process it, then delete it when done processing. '''
+
 # construct the argument parse and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required=True,
