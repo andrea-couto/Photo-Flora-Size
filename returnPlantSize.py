@@ -142,4 +142,17 @@ def main():
         cv2.imshow("final", orig)
         cv2.waitKey(0)
 
+'''This needs to run once for top and once for side cam
+the posting really should be done in another file
+This can return the sizes and be called in postToFirebase.py
+
+topCam = returnPlantSize(topImage.jpg,0.955)
+sideCam = returnPlantSize(sideImage.jpg,0.955)
+
+#post to doc topImage
+#post to doc SideImage
+
+'''
+
+
 main()
