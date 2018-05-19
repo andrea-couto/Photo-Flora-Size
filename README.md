@@ -9,7 +9,9 @@ object with a known width in inches to measure the plant.<br><br>
 To run returnPlantSize.py in the command line with a photo called plantImage and a quarter as a 
 reference object:<br>
 
-python3 returnPlantSize.py --image images/plantImage.jpg --width 0.955<br><br>
+on Raspbian:<br>
+python3 returnPlantSize.py --image images/plantImage.jpg --width 0.955<br>
+
 
 Requirements:<br>
 openCV-python<br>

@@ -131,6 +131,8 @@ for c in cnts:
             # compute the size of the object
         dimA = dA / pixelsPerMetric
         dimB = dB / pixelsPerMetric
+        print(dimA)
+        print(dimB)
 
         # draw the object sizes on the image
         cv2.putText(orig, "{:.1f}in".format(dimB),
@@ -140,8 +142,6 @@ for c in cnts:
         cv2.putText(orig, "{:.1f}in".format(dimA),
                     (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX,
                     0.65, (0, 0, 0), 2)
-
-        #python test1.py --image testPlant.jpg --width 0.955
 
     cv2.imshow("final", orig)
     cv2.waitKey(0)
