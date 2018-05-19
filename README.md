@@ -17,7 +17,7 @@ scipy<br>
 numpy<br>
 imutils<br>
 
-takePhoto.py, postToFirebase.py, and test_post.py are incomplete
+postToFirebase.py, and tests are incomplete
 
 
 
