@@ -2,8 +2,8 @@
 
 This project is intended to show plant growth over a period of time using openCV.<br><br>
 
-We have a program that will take a photo and reference width as arguments.
-returnPlantSize.py uses openCV to recognize the plant in the photo and use a reference
+We have a program that will take a photo and reference width as arguments.<br>
+returnPlantSize.py uses openCV to recognize the plant in the photo and use a reference<br>
 object with a known width in inches to measure the plant.<br><br>
 
 To run returnPlantSize.py in the command line with a photo called plantImage and a quarter as a 
@@ -19,8 +19,7 @@ scipy<br>
 numpy<br>
 imutils<br>
 
-postToFirebase.py, and tests are incomplete
-
+pullFromFirebase.py, onceADay.py, takePhotos.py and tests are incomplete<br>
 
 
 

@@ -4,25 +4,31 @@ import datetime
 
 now = datetime.datetime.now()
 today = now.strftime("%Y-%m-%d")
+picNameTop = today + "_top" + ".png"
+picNameSide = today + "_side" + ".png"
 
 def takePiCamPhoto(topImgName):
     camera = PiCamera()
     camera.resolution = (800,600)
-    camera.capture(topImgName + ".png")
+    camera.capture(topImgName)
 
 def takeWebcamPhoto(sideImgName):
     cam = cv2.VideoCapture(0)
-    s, im = cam.read() # captures image
-    sideImgName = sideImgName + ".png"
-    cv2.imwrite(sideImgName,im) # writes image to disk
+    s, im = cam.read() 
+    sideImgName = sideImgName
+    cv2.imwrite(sideImgName,im)
 
-def main ():
-    picNameTop = today + "_top"
-    picNameSide = today + "_side"
+def getPhotoNames():
+    return picNameTop, picNameSide
+
+
+def takePhotos():
     takePiCamPhoto(picNameTop)
     takeWebcamPhoto(picNameSide)
+    
 
-main()
+if __name__ == '__main__':
+    takePhotos()
 
 ##TODO save photos to images folder
 ##These photos should only be stored here until returnPlantSize.py processes them

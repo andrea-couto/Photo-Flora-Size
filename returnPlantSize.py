@@ -1,4 +1,4 @@
-# This program draws heavily upon the following tutorial
+# This program draws upon the following tutorial
 # https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/
 
 import cv2
@@ -9,29 +9,17 @@ from imutils import contours
 import imutils
 from imutils import perspective
 
-'''
-maybe we shoud'nt be taking the image as a parameter because we dont know what the image name will be
-how about we grab a list of all the images in the images folder, then while list is not empty,
-we take the image and process it, then delete it when done processing. '''
-
 #Global Constants
 lowerBound = np.array([33, 80, 40])
 upperBound = np.array([102, 255, 255])
 kernelOpen = np.ones((1, 1))
 kernelClose = np.ones((20, 20))
+PATHTOIMAGE = "images\plantImage.jpg"
+REFWIDTH = 0.955
+
 
 def midpoint(ptA, ptB):
     return ((ptA[0] + ptB[0]) * 0.5, (ptA[1] + ptB[1]) * 0.5)
-
-
-def makeCommandArguments():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("-i", "--image", required=True,
-                    help="path to the input image")
-    ap.add_argument("-w", "--width", type=float, required=True,
-                    help="width of the left-most object in the image (in inches)")
-    args = vars(ap.parse_args())
-    return args
 
 
 def returnGreenObjects(img):
@@ -97,9 +85,10 @@ def drawSizes(orig, dimB, dimA,tltrX,tltrY,trbrX,trbrY):
                 (int(trbrX + 10), int(trbrY)), cv2.FONT_HERSHEY_SIMPLEX,
                 0.65, (0, 0, 0), 2)
 
-def main():
-    args = makeCommandArguments()
-    img = cv2.imread(args["image"],1)
+
+def calculateAndDisplay(PATHTOIMAGE, REFWIDTH):
+    measureList = []
+    img = cv2.imread(PATHTOIMAGE, 1)
     img = cv2.resize(img, (340, 220))
 
     conts = returnGreenObjects(img)
@@ -132,28 +121,23 @@ def main():
             dB = dist.euclidean((tlblX, tlblY), (trbrX, trbrY))
 
             if pixelsPerMetric is None:
-                pixelsPerMetric = dB / args["width"] #in inches
+                pixelsPerMetric = dB / REFWIDTH
 
             dimA = dA / pixelsPerMetric
             dimB = dB / pixelsPerMetric
 
             drawSizes(orig, dimB, dimA,tltrX,tltrY,trbrX,trbrY)
 
-        print(str(round(dimA,2)) + " " + str(round(dimB,2)))
+        measureA = str(round(dimA,2))
+        measureB = str(round(dimB,2))
+        measureList.append((measureA,measureB))
+        print(measureA + " " + measureB)
 
         cv2.imshow("final", orig)
         cv2.waitKey(0)
+    return measureList
 
-'''This needs to run once for top and once for side cam
-the posting really should be done in another file
-This can return the sizes and be called in postToFirebase.py
 
-topCam = returnPlantSize(topImage.jpg,0.955)
-sideCam = returnPlantSize(sideImage.jpg,0.955)
+if __name__ == '__main__':
+    calculateAndDisplay(PATHTOIMAGE, REFWIDTH)
 
-#post to doc topImage
-#post to doc SideImage
-
-'''
-
-main()
