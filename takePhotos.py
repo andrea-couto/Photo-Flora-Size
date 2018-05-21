@@ -1,5 +1,9 @@
 from picamera import PiCamera
 import cv2
+import datetime
+
+now = datetime.datetime.now()
+today = now.strftime("%Y-%m-%d")
 
 def takePiCamPhoto(topImgName):
     camera = PiCamera()
@@ -13,14 +17,12 @@ def takeWebcamPhoto(sideImgName):
     cv2.imwrite(sideImgName,im) # writes image to disk
 
 def main ():
-    testNameTop = "testName"
-    testNameSide = "testSideName"
-    takePiCamPhoto(testNameTop)
-    takeWebcamPhoto(testNameSide)
+    picNameTop = today + "_top"
+    picNameSide = today + "_side"
+    takePiCamPhoto(picNameTop)
+    takeWebcamPhoto(picNameSide)
 
 main()
-
-##TODO give descriptive names to photos
 
 ##TODO save photos to images folder
 ##These photos should only be stored here until returnPlantSize.py processes them
