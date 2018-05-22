@@ -8,20 +8,25 @@ from scipy.spatial import distance as dist
 from imutils import contours
 import imutils
 from imutils import perspective
+import os
 
 #Global Constants
 lowerBound = np.array([33, 80, 40])
 upperBound = np.array([102, 255, 255])
 kernelOpen = np.ones((1, 1))
 kernelClose = np.ones((20, 20))
-PATHTOIMAGE = "images\plantImage.jpg"
+imgName = "plantImage.jpg"
+PATHTODIRECTORY = os.path.dirname(os.path.realpath("takePhotos"))
 REFWIDTH = 0.955
 
 
-def setDefaultsByOs():
+def setDirPathByOs():
     OS = sys.platform
     if "linux" in OS:
-        PATHTOIMAGE = "/home/pi/Documents/Photo-Flora-Size/images/plantImage.jpg"
+        PATHTOIMAGES = PATHTODIRECTORY + "/images/"
+    else:
+        PATHTOIMAGES = PATHTODIRECTORY + "\\images\\"
+    return PATHTOIMAGES
 
 
 def midpoint(ptA, ptB):
@@ -92,15 +97,15 @@ def drawSizes(orig, dimB, dimA,tltrX,tltrY,trbrX,trbrY):
                 0.65, (0, 0, 0), 2)
 
 
-def calculateAndDisplay(PATHTOIMAGE, REFWIDTH):
-    setDefaultsByOs()
+def calculateAndDisplay(imgName, REFWIDTH):
+    directory = setDirPathByOs()
     measureList = []
-    img = cv2.imread(PATHTOIMAGEPI, 1)
+    img = cv2.imread(directory + imgName, 1)
     img = cv2.resize(img, (340, 220))
 
     conts = returnGreenObjects(img)
     ref = returnReferenceObject(img)
-    if ref is none:
+    if ref is None:
         ref = returnReferenceObject(img)
         print("ref obj was none, trying again") # eventually write to log
 
@@ -148,5 +153,5 @@ def calculateAndDisplay(PATHTOIMAGE, REFWIDTH):
     return measureList
 
 if __name__ == '__main__':
-    calculateAndDisplay(PATHTOIMAGE, REFWIDTH)
+    calculateAndDisplay(imgName, REFWIDTH)
 
