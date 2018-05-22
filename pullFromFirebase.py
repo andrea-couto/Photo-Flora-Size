@@ -8,7 +8,7 @@ import requests
 import sys
 
 database_url = 'https://Photo-Flora-Size.firebaseio.com/'
-TRACELIST = ['topCamera','sideCamera']
+TRACELIST = ['topMeasurements','sideMeasurements']
 #database should have two collections: topCamera and sideCamera
 #create a function to make sure these exist, if not should not continue with program and alert user
 
@@ -17,7 +17,7 @@ def get_database(DB_url):
     if requests.get(DB_url).status_code != 200:
         sys.exit("database not found")
     else:
-        databasea = firebase.FirebaseApplication(DB_url, None)
+        database = firebase.FirebaseApplication(DB_url, None)
         return database
 
 

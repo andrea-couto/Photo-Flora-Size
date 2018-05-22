@@ -30,7 +30,4 @@ def takePhotos():
 if __name__ == '__main__':
     takePhotos()
 
-##TODO save photos to images folder
-##These photos should only be stored here until returnPlantSize.py processes them
-##after processing returnPlantSize should delete the photos
 
