@@ -1,6 +1,6 @@
 # This program draws upon the following tutorial
 # https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/
-
+import sys
 import cv2
 import numpy as np
 import argparse
@@ -15,8 +15,13 @@ upperBound = np.array([102, 255, 255])
 kernelOpen = np.ones((1, 1))
 kernelClose = np.ones((20, 20))
 PATHTOIMAGE = "images\plantImage.jpg"
-PATHTOIMAGEPI = "/home/pi/Documents/Photo-Flora-Size/images/plantImage.jpg"
 REFWIDTH = 0.955
+
+
+def setDefaultsByOs():
+    OS = sys.platform
+    if "linux" in OS:
+        PATHTOIMAGE = "/home/pi/Documents/Photo-Flora-Size/images/plantImage.jpg"
 
 
 def midpoint(ptA, ptB):
@@ -88,12 +93,16 @@ def drawSizes(orig, dimB, dimA,tltrX,tltrY,trbrX,trbrY):
 
 
 def calculateAndDisplay(PATHTOIMAGE, REFWIDTH):
+    setDefaultsByOs()
     measureList = []
     img = cv2.imread(PATHTOIMAGEPI, 1)
     img = cv2.resize(img, (340, 220))
 
     conts = returnGreenObjects(img)
     ref = returnReferenceObject(img)
+    if ref is none:
+        ref = returnReferenceObject(img)
+        print("ref obj was none, trying again") # eventually write to log
 
     (cnts, _) = contours.sort_contours(conts)
     pixelsPerMetric = None
@@ -137,7 +146,6 @@ def calculateAndDisplay(PATHTOIMAGE, REFWIDTH):
         cv2.imshow("final", orig)
         cv2.waitKey(999)
     return measureList
-
 
 if __name__ == '__main__':
     calculateAndDisplay(PATHTOIMAGE, REFWIDTH)
