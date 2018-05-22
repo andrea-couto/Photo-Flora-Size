@@ -10,13 +10,13 @@ picNameSide = today + "_side" + ".png"
 def takePiCamPhoto(topImgName):
     camera = PiCamera()
     camera.resolution = (800,600)
-    camera.capture(topImgName)
+    camera.capture("/home/pi/Documents/Photo-Flora-Size/images/"+topImgName)
 
 def takeWebcamPhoto(sideImgName):
     cam = cv2.VideoCapture(0)
     s, im = cam.read() 
     sideImgName = sideImgName
-    cv2.imwrite(sideImgName,im)
+    cv2.imwrite("/home/pi/Documents/Photo-Flora-Size/images/"+sideImgName,im)
 
 def getPhotoNames():
     return picNameTop, picNameSide
