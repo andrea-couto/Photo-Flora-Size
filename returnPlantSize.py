@@ -101,6 +101,8 @@ def calculateAndDisplay(imgName, REFWIDTH):
     directory = setDirPathByOs()
     measureList = []
     img = cv2.imread(directory + imgName, 1)
+    if img is None:
+        return print("Image does not exist: "+imgName) # eventually written to log
     img = cv2.resize(img, (340, 220))
 
     conts = returnGreenObjects(img)

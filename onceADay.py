@@ -5,7 +5,7 @@ import returnPlantSize
 We should not fail miserably when the program doesnt find a reference object in the photo
 '''
 
-takePhotos.takePhotos()
+picNameTop, picNameSide = takePhotos.takePhotos()
 createdImages = takePhotos.getPhotoNames()
 
 top = returnPlantSize.calculateAndDisplay(createdImages[0], 0.955)

@@ -1,13 +1,13 @@
-# from picamera import PiCamera
+from picamera import PiCamera
 import cv2
 import datetime
 import os
 import sys
 
-now = datetime.datetime.now()
-today = now.strftime("%Y-%m-%d")
-picNameTop = today + "_top" + ".png"
-picNameSide = today + "_side" + ".png"
+NOW = datetime.datetime.now()
+TODAY = NOW.strftime("%Y-%m-%d")
+picNameTop = TODAY + "_top" + ".png"
+picNameSide = TODAY + "_side" + ".png"
 PATHTODIRECTORY = os.path.dirname(os.path.realpath("takePhotos"))
 
 def setDefaultsByOs():
@@ -37,8 +37,9 @@ def getPhotoNames():
 
 def takePhotos():
     pathToImage = setDefaultsByOs()
-    # takePiCamPhoto(picNameTop, pathToImage)
+    takePiCamPhoto(picNameTop, pathToImage)
     takeWebcamPhoto(picNameSide, pathToImage)
+    return picNameTop, picNameSide
 
 
 if __name__ == '__main__':
