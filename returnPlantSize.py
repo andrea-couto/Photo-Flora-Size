@@ -1,6 +1,5 @@
 # This program draws upon the following tutorial
 # https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/
-import sys
 import cv2
 import numpy as np
 import argparse
@@ -8,7 +7,7 @@ from scipy.spatial import distance as dist
 from imutils import contours
 import imutils
 from imutils import perspective
-import os
+import helperFunctions
 
 #Global Constants
 lowerBound = np.array([33, 80, 40])
@@ -16,17 +15,7 @@ upperBound = np.array([102, 255, 255])
 kernelOpen = np.ones((1, 1))
 kernelClose = np.ones((20, 20))
 imgName = "plantImage.jpg"
-PATHTODIRECTORY = os.path.dirname(os.path.realpath("takePhotos"))
 REFWIDTH = 0.955
-
-
-def setDirPathByOs():
-    OS = sys.platform
-    if "linux" in OS:
-        PATHTOIMAGES = PATHTODIRECTORY + "/images/"
-    else:
-        PATHTOIMAGES = PATHTODIRECTORY + "\\images\\"
-    return PATHTOIMAGES
 
 
 def midpoint(ptA, ptB):
@@ -98,7 +87,7 @@ def drawSizes(orig, dimB, dimA,tltrX,tltrY,trbrX,trbrY):
 
 
 def calculateAndDisplay(imgName, REFWIDTH):
-    directory = setDirPathByOs()
+    directory = helperFunctions.setDirPathByOs()
     measureList = []
     img = cv2.imread(directory + imgName, 1)
     if img is None:
