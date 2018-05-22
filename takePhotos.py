@@ -1,4 +1,4 @@
-from picamera import PiCamera
+# from picamera import PiCamera
 import cv2
 import datetime
 import os
@@ -37,7 +37,7 @@ def getPhotoNames():
 
 def takePhotos():
     pathToImage = setDefaultsByOs()
-    takePiCamPhoto(picNameTop, pathToImage)
+    # takePiCamPhoto(picNameTop, pathToImage)
     takeWebcamPhoto(picNameSide, pathToImage)
     return picNameTop, picNameSide
 
