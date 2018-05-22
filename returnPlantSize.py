@@ -15,6 +15,7 @@ upperBound = np.array([102, 255, 255])
 kernelOpen = np.ones((1, 1))
 kernelClose = np.ones((20, 20))
 PATHTOIMAGE = "images\plantImage.jpg"
+PATHTOIMAGEPI = "/home/pi/Documents/Photo-Flora-Size/images/plantImage.jpg"
 REFWIDTH = 0.955
 
 
@@ -88,7 +89,7 @@ def drawSizes(orig, dimB, dimA,tltrX,tltrY,trbrX,trbrY):
 
 def calculateAndDisplay(PATHTOIMAGE, REFWIDTH):
     measureList = []
-    img = cv2.imread(PATHTOIMAGE, 1)
+    img = cv2.imread(PATHTOIMAGEPI, 1)
     img = cv2.resize(img, (340, 220))
 
     conts = returnGreenObjects(img)
@@ -134,7 +135,7 @@ def calculateAndDisplay(PATHTOIMAGE, REFWIDTH):
         print(measureA + " " + measureB)
 
         cv2.imshow("final", orig)
-        cv2.waitKey(0)
+        cv2.waitKey(999)
     return measureList
 
 
