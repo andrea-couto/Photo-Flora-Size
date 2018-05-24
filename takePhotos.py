@@ -1,28 +1,36 @@
-from picamera import PiCamera
+# from picamera import PiCamera
 import cv2
+import datetime
+import helperFunctions
 
-def takePiCamPhoto(topImgName):
+NOW = datetime.datetime.now()
+TODAY = NOW.strftime("%Y-%m-%d")
+picNameTop = TODAY + "_top" + ".png"
+picNameSide = TODAY + "_side" + ".png"
+
+
+def takePiCamPhoto(topImgName, pathToImage):
     camera = PiCamera()
     camera.resolution = (800,600)
-    camera.capture(topImgName + ".png")
+    camera.capture(pathToImage + topImgName)
 
-def takeWebcamPhoto(sideImgName):
+
+def takeWebcamPhoto(sideImgName, pathToImage):
     cam = cv2.VideoCapture(0)
-    s, im = cam.read() # captures image
-    sideImgName = sideImgName + ".png"
-    cv2.imwrite(sideImgName,im) # writes image to disk
+    s, im = cam.read() 
+    sideImgName = sideImgName
+    #TODO error check writing pathToImage
+    cv2.imwrite(pathToImage + sideImgName,im)
 
-def main ():
-    testNameTop = "testName"
-    testNameSide = "testSideName"
-    takePiCamPhoto(testNameTop)
-    takeWebcamPhoto(testNameSide)
 
-main()
+def takePhotos():
+    pathToImage = helperFunctions.setDirPathByOs()
+    # takePiCamPhoto(picNameTop, pathToImage)
+    takeWebcamPhoto(picNameSide, pathToImage)
+    return picNameTop, picNameSide
 
-##TODO give descriptive names to photos
 
-##TODO save photos to images folder
-##These photos should only be stored here until returnPlantSize.py processes them
-##after processing returnPlantSize should delete the photos
+if __name__ == '__main__':
+    takePhotos()
+
 
