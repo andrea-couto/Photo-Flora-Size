@@ -37,7 +37,7 @@ docRef.set({
     u'measurement 2': sideMeasurement[1],
 
   })
-# print(+ " measurement was uploaded")
+print( str(sideMeasurement) + " measurement was uploaded")
 
 os.remove(helperFunctions.setDirPathByOs() + picNameSide)
 
