@@ -19,6 +19,7 @@ openCV-python<br>
 scipy<br>
 numpy<br>
 imutils<br>
+firebase_admin<br>
 
 Keep in mind this project is not complete<br>
 
