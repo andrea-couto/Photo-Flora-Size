@@ -1,4 +1,4 @@
-# from picamera import PiCamera
+from picamera import PiCamera
 import cv2
 import datetime
 import helperFunctions
@@ -25,7 +25,7 @@ def takeWebcamPhoto(sideImgName, pathToImage):
 
 def takePhotos():
     pathToImage = helperFunctions.setDirPathByOs()
-    # takePiCamPhoto(picNameTop, pathToImage)
+    takePiCamPhoto(picNameTop, pathToImage)
     takeWebcamPhoto(picNameSide, pathToImage)
     return picNameTop, picNameSide
 
