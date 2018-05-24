@@ -20,6 +20,9 @@ def get_database(DB_url):
         database = firebase.FirebaseApplication(DB_url, None)
         return database
 
+database = get_database(database_url)
+print(database.collections())
+
 
 def get_FB_keys(doc_title, database):
     result_data = database.get(doc_title, None)
@@ -59,65 +62,65 @@ def return_data_for_graph(database):
     return data
 
 
-def main():
-    app = dash.Dash()
-    database = get_database(database_url)
-    data = return_data_for_graph(database)
-    app.config.suppress_callback_exceptions = True
-    app.layout = html.Div([
-        dcc.Location(id='url', refresh=False),
-        html.Div(id='page-content')
-    ])
+# def main():
+#     app = dash.Dash()
+#     database = get_database(database_url)
+#     data = return_data_for_graph(database)
+#     app.config.suppress_callback_exceptions = True
+#     app.layout = html.Div([
+#         dcc.Location(id='url', refresh=False),
+#         html.Div(id='page-content')
+#     ])
 
-    index_page = html.Div([
-        html.H1(children='Plant Measurement Data'),
-        html.Div(children='''By Andy Couto and Amanda Morrison'''),
-        html.Br(),
-        dcc.Link('Graph', href='/page-1'),
-        html.P('Graph of plant growth over time'),
-        html.Br()
-    ], style={
-                'textAlign': 'center',
-                'color': '#7FDBFF'
-            })
+#     index_page = html.Div([
+#         html.H1(children='Plant Measurement Data'),
+#         html.Div(children='''By Andy Couto and Amanda Morrison'''),
+#         html.Br(),
+#         dcc.Link('Graph', href='/page-1'),
+#         html.P('Graph of plant growth over time'),
+#         html.Br()
+#     ], style={
+#                 'textAlign': 'center',
+#                 'color': '#7FDBFF'
+#             })
 
-    page_1_layout = html.Div(children=[
-        html.H1(children='Plant Growth Graph'),
+#     page_1_layout = html.Div(children=[
+#         html.H1(children='Plant Growth Graph'),
 
-        html.Div(children='''
-            By Andy Couto and Amanda Morrison
-        '''),
-        dcc.Graph(
-            id='plant-growth-graph',
-            figure={
-                'data': data,
-                'layout': {
-                    'title': 'Plant Growth Over Time'
-                }
-            }
-        ),
-        html.Div(id='page-1-content'),
-        html.Br(),
-        dcc.Link('Go back to home', href='/'),
-    ])
-
-
-    # Update the index
-    @app.callback(dash.dependencies.Output('page-content', 'children'),
-                  [dash.dependencies.Input('url', 'pathname')])
-    def display_page(pathname):
-        if pathname == '/page-1':
-            return page_1_layout
-        else:
-            return index_page
+#         html.Div(children='''
+#             By Andy Couto and Amanda Morrison
+#         '''),
+#         dcc.Graph(
+#             id='plant-growth-graph',
+#             figure={
+#                 'data': data,
+#                 'layout': {
+#                     'title': 'Plant Growth Over Time'
+#                 }
+#             }
+#         ),
+#         html.Div(id='page-1-content'),
+#         html.Br(),
+#         dcc.Link('Go back to home', href='/'),
+#     ])
 
 
-    app.css.append_css({
-        'external_url': 'https://codepen.io/chriddyp/pen/bWLwgP.css'
-    })
+#     # Update the index
+#     @app.callback(dash.dependencies.Output('page-content', 'children'),
+#                   [dash.dependencies.Input('url', 'pathname')])
+#     def display_page(pathname):
+#         if pathname == '/page-1':
+#             return page_1_layout
+#         else:
+#             return index_page
 
-    app.run_server(debug=True)
+
+#     app.css.append_css({
+#         'external_url': 'https://codepen.io/chriddyp/pen/bWLwgP.css'
+#     })
+
+#     app.run_server(debug=True)
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()

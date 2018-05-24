@@ -143,6 +143,7 @@ def calculateAndDisplay(imgName, REFWIDTH):
         cv2.waitKey(999)
     return measureList
 
+
 if __name__ == '__main__':
     calculateAndDisplay(imgName, REFWIDTH)
 

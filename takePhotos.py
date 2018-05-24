@@ -14,15 +14,13 @@ def takePiCamPhoto(topImgName, pathToImage):
     camera.resolution = (800,600)
     camera.capture(pathToImage + topImgName)
 
+
 def takeWebcamPhoto(sideImgName, pathToImage):
     cam = cv2.VideoCapture(0)
     s, im = cam.read() 
     sideImgName = sideImgName
     #TODO error check writing pathToImage
     cv2.imwrite(pathToImage + sideImgName,im)
-
-def getPhotoNames():
-    return picNameTop, picNameSide
 
 
 def takePhotos():
