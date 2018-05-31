@@ -33,6 +33,44 @@
 
     <!-- Custom styles for this template -->
     <link href="Photo-Flora-Size.css" rel="stylesheet">
+    
+    <!-- firebase initialize -->
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-firestore.js"></script>
+
+    <script>
+      var config = {
+        apiKey: "AIzaSyCThIfVfDCeEKT9E7MBekblBWDwby058JU",
+        authDomain: "photo-flora-size.firebaseapp.com",
+        databaseURL: "https://photo-flora-size.firebaseio.com",
+        projectId: "photo-flora-size",
+        storageBucket: "photo-flora-size.appspot.com",
+        messagingSenderId: "414135939946"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+<script type="text/javascript">    
+  var db = firebase.firestore();
+</script>
+
+<!-- The following is pulling down all documents from firebase and logging to console -->
+<script type="text/javascript">
+  db.collection("topMeasurements").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+    });
+});
+</script>
+
+<script type="text/javascript">
+  db.collection("sideMeasurements").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+    });
+});
+</script>
 
 	<!-- plotly -->
 	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>  </head>
@@ -78,14 +116,44 @@
     </nav>
 
 <!-- Add CSS to this div to make it bottom middle -->
-<div id="tester" class="mx-auto fixed-bottom" style="width:600px;height:250px;"></div>
-<script>
-	TESTER = document.getElementById('tester');
-	Plotly.plot( TESTER, [{
-	x: [1, 2, 3, 4, 5],
-	y: [1, 2, 4, 8, 16] }], {
-	margin: { t: 0 } } );
-</script>
+<div id="myDiv" class="mx-auto fixed-bottom" style="width:600px;height:250px;"></div>
+  <script>
+
+  Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function(err, rows){
+
+    function unpack(rows, key) {
+    return rows.map(function(row) { return row[key]; });
+  }
+
+  //Need pandas dataframe for X and Y
+
+  var trace1 = {
+    type: "scatter",
+    mode: "lines",
+    name: 'Top Measurement',
+    x: unpack(rows, 'Date'),
+    y: unpack(rows, 'AAPL.High'),
+    line: {color: '#17BECF'}
+  }
+
+  var trace2 = {
+    type: "scatter",
+    mode: "lines",
+    name: 'Side Measurement',
+    x: unpack(rows, 'Date'),
+    y: unpack(rows, 'AAPL.Low'),
+    line: {color: '#7F7F7F'}
+  }
+
+  var data = [trace1,trace2];
+
+  var layout = {
+    title: 'Milkweed Measurements Over Time',
+  };
+
+  Plotly.newPlot('myDiv', data, layout);
+  })
+  </script>
 
   </body>
 </html>
