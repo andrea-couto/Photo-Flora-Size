@@ -21,7 +21,8 @@ numpy<br>
 imutils<br>
 firebase_admin<br>
 
-Keep in mind this project is not complete<br>
+Keep in mind this project is not complete<br><br>
+Check out the website: http://andycouto.com/Photo-Flora-Size/<br>
 
 
 
