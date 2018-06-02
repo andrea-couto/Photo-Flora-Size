@@ -84,7 +84,7 @@ def main():
 	if (checkConnection() == 200):
 		db = connectDB("./serviceAccountKey.json")
 		cachedData = ReadLog("TEMPLOG.txt")
-# 	#if cachedData.size() !=0:
+ 	#if cachedData.size() !=0:
 		#for element in cachedData:
 			#for part in element:
 				#parts are date, height, width 
